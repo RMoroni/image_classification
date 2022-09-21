@@ -1,15 +1,39 @@
-import os
 import cv2
 import zipfile
 import numpy as np
+import matplotlib.pyplot as plt
 from tqdm import tqdm
+
+
+def create_label(filename):
+    category = filename.split('/')[1]
+    if category == 'children':
+        return np.array([1, 0])
+    elif category == 'adults':
+        return np.array([0, 1])
+    else:
+        print('label fails')
+
+
+def open_image(image_data):
+    return cv2.imdecode(np.frombuffer(image_data, np.uint8), cv2.IMREAD_COLOR)
 
 
 def read_dataset():
     zf = zipfile.ZipFile('dataset.zip', 'r')
-    # print(zf.namelist())
-    img_file = zf.read(name='test/adults/1.jpg')
-    test_image(img_file)
+    x_train, y_train, x_test, y_test = [], [], [], []
+    for file in tqdm(zf.namelist()):
+        image_data = zf.read(name=file)
+        if 'train' in file:
+            x_train.append(open_image(image_data))
+            y_train.append(create_label(file))
+        elif 'test' in file:
+            x_test.append(open_image(image_data))
+            y_test.append(create_label(file))
+        else:
+            print(f'not possible to read from {file}')
+
+    return np.asarray(x_train), np.asarray(y_train), np.asarray(x_test), np.asarray(y_test)
 
 
 def test_image(img_data):
@@ -19,5 +43,18 @@ def test_image(img_data):
     print(np.array(img).shape)
 
 
+def check_label_from_sample(train, test):
+    train_sample = train[1]
+    test_sample = test[1]
+    print('should show the same category:')
+    print(test_sample)
+    plt.figure(figsize=(10, 5))
+    plt.imshow(train_sample)
+    plt.show()
+
+
 if __name__ == '__main__':
-    read_dataset()
+    x_train, y_train, x_test, y_test = read_dataset()
+    # print(x_train.shape)
+    # print(y_test.shape)
+    check_label_from_sample(x_test, y_test)
