@@ -4,15 +4,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 
-INPUT_LENGTH = 320 * 370 * 3  # image_size * channels
-
 
 def create_label(filename):
     category = filename.split('/')[1]
     if category == 'children':
-        return np.array([1, 0])
+        return 0
     elif category == 'adults':
-        return np.array([0, 1])
+        return 1
     else:
         print('label fails')
 
@@ -47,8 +45,8 @@ def test_image(img_data):
 
 
 def check_label_from_sample(train, test):
-    train_sample = train[1]
-    test_sample = test[1]
+    train_sample = train[0]
+    test_sample = test[0]
     print('should show the same category:')
     print(test_sample)
     plt.figure(figsize=(10, 5))
@@ -62,6 +60,6 @@ def load_dataset():
     # print(y_train.shape)
     # print(x_test.shape)
     # print(y_test.shape)
-    check_label_from_sample(x_test, y_test)
-    x_train, x_test = x_train.reshape(-1, INPUT_LENGTH), x_test.reshape(-1, INPUT_LENGTH)  # reshape into a list
+    # check_label_from_sample(x_test, y_test)
+    # x_train, x_test = x_train.reshape(-1, INPUT_LENGTH), x_test.reshape(-1, INPUT_LENGTH)  # reshape into a list
     return x_train, y_train, x_test, y_test

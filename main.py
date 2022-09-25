@@ -1,4 +1,5 @@
 import dataset
+import train
 
 
 def main():
@@ -7,7 +8,7 @@ def main():
     # print(y_train.shape)
     # print(x_test.shape)
     # print(y_test.shape)
-    # TODO: train step
+    train.main(x_train, y_train)
     # TODO: test step
 
 
