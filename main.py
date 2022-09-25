@@ -8,7 +8,7 @@ def main():
     # print(y_train.shape)
     # print(x_test.shape)
     # print(y_test.shape)
-    train.main(x_train, y_train)
+    fit_model = train.main(x_train, y_train)
     # TODO: test step
 
 

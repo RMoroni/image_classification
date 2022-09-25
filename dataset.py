@@ -4,6 +4,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 
+IMAGE_SIZE = 256
+
 
 def create_label(filename):
     category = filename.split('/')[1]
@@ -16,7 +18,8 @@ def create_label(filename):
 
 
 def open_image(image_data):
-    return cv2.imdecode(np.frombuffer(image_data, np.uint8), cv2.IMREAD_COLOR)
+    cv2_img = cv2.imdecode(np.frombuffer(image_data, np.uint8), cv2.IMREAD_COLOR)
+    return cv2.resize(cv2_img, (IMAGE_SIZE, IMAGE_SIZE))
 
 
 def read_dataset():
@@ -56,10 +59,10 @@ def check_label_from_sample(train, test):
 
 def load_dataset():
     x_train, y_train, x_test, y_test = read_dataset()
-    # print(x_train.shape)
-    # print(y_train.shape)
-    # print(x_test.shape)
-    # print(y_test.shape)
+    print(x_train.shape)
+    print(y_train.shape)
+    print(x_test.shape)
+    print(y_test.shape)
     # check_label_from_sample(x_test, y_test)
     # x_train, x_test = x_train.reshape(-1, INPUT_LENGTH), x_test.reshape(-1, INPUT_LENGTH)  # reshape into a list
     return x_train, y_train, x_test, y_test
