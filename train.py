@@ -8,7 +8,7 @@ from sklearn.metrics import accuracy_score
 BATCH_SIZE = 85
 DEVICE = "cpu"
 LEARNING_RATE = 0.001
-N_EPOCHS = 10
+N_EPOCHS = 15
 N_CLASSES = 2
 WEIGHT_DECAY = 0.0001
 
@@ -43,11 +43,11 @@ def fit(cnn_model, dataloader):
     return cnn_model
 
 
-def main(data, labels):
+def main(data, labels, cnn_model_name='default'):
     tensor_x = from_numpy(data.transpose(0, 3, 1, 2))
     tensor_y = from_numpy(labels)
     tensor_dataset = TensorDataset(tensor_x, tensor_y)
     dataloader = DataLoader(dataset=tensor_dataset, batch_size=BATCH_SIZE, shuffle=True)
-    cnn_model = get_cnn_model_by_name('le_net', N_CLASSES)
+    cnn_model = get_cnn_model_by_name(cnn_model_name, N_CLASSES)
     fit_model = fit(cnn_model, dataloader)
     return fit_model

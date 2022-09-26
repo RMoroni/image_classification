@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 
-IMAGE_SIZE = 256
+IMAGE_SIZE = 64
 
 
 def create_label(filename):
