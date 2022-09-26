@@ -7,7 +7,7 @@ from torch import from_numpy
 from torch.utils.data import TensorDataset, DataLoader
 
 DATASET_FILE = 'dataset.zip'
-IMAGE_SIZE = 80
+IMAGE_SIZE = 128
 
 
 def create_label(filename):

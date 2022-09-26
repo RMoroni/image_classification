@@ -1,7 +1,5 @@
 from torch import nn
 
-# PERDA DE RESOLUÇÃO POR CAMADA: ((IMG_SIZE - KERNEL_SIZE + 2*PADDING)/STRIDE)+1
-
 
 def le_net_wiki(n_classes):
     cnn_model = nn.Sequential(
@@ -54,7 +52,7 @@ def le_net(n_classes):
         nn.Tanh(),
         nn.Linear(84, n_classes),
     )
-    return cnn_model
+    return cnn_model  # 64 x 64
 
 
 def alex_net(n_classes):
@@ -262,7 +260,7 @@ def kaggle_test_1(n_classes):
         nn.Sigmoid(),
         nn.Linear(64, n_classes),
     )
-    return cnn_model
+    return cnn_model  # 80 x 80
 
 
 def kaggle_test_2(n_classes):
@@ -290,13 +288,13 @@ def kaggle_test_2(n_classes):
 
         # DenseBlock
         nn.Flatten(),
-        nn.Linear(8192, 512),
+        nn.Linear(25088, 512),
         nn.ReLU(),
         nn.BatchNorm1d(512),
         nn.Dropout(inplace=True),
         nn.Linear(512, n_classes),
     )
-    return cnn_model
+    return cnn_model  # 128x128
 
 
 def get_cnn_model_by_name(name='le_net', n_classes=2):
