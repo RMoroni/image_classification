@@ -1,8 +1,8 @@
+import dataset
 from cnn_models import get_cnn_model_by_name
 import numpy as np
-from torch import nn, from_numpy, max
+from torch import nn, max
 from torch.optim import Adam
-from torch.utils.data import TensorDataset, DataLoader
 from sklearn.metrics import accuracy_score
 
 BATCH_SIZE = 85
@@ -44,10 +44,7 @@ def fit(cnn_model, dataloader):
 
 
 def main(data, labels, cnn_model_name='default'):
-    tensor_x = from_numpy(data.transpose(0, 3, 1, 2))
-    tensor_y = from_numpy(labels)
-    tensor_dataset = TensorDataset(tensor_x, tensor_y)
-    dataloader = DataLoader(dataset=tensor_dataset, batch_size=BATCH_SIZE, shuffle=True)
+    dataloader = dataset.dataset_to_dataloader(data, labels, BATCH_SIZE)
     cnn_model = get_cnn_model_by_name(cnn_model_name, N_CLASSES)
     fit_model = fit(cnn_model, dataloader)
     return fit_model

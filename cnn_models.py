@@ -3,7 +3,7 @@ from torch import nn
 # PERDA DE RESOLUÇÃO POR CAMADA: ((IMG_SIZE - KERNEL_SIZE + 2*PADDING)/STRIDE)+1
 
 
-def le_net_wiki(n_classes, image_size):
+def le_net_wiki(n_classes):
     cnn_model = nn.Sequential(
         # ConvBlock 1
         nn.Conv2d(3, 6, kernel_size=5, stride=1, padding=2),
@@ -29,7 +29,7 @@ def le_net_wiki(n_classes, image_size):
     return cnn_model
 
 
-def le_net(n_classes, image_size):
+def le_net(n_classes):
     cnn_model = nn.Sequential(
         # ConvBlock 1
         nn.Conv2d(3, 6, kernel_size=5, stride=1, padding=0),
@@ -57,7 +57,7 @@ def le_net(n_classes, image_size):
     return cnn_model
 
 
-def alex_net(n_classes, image_size):
+def alex_net(n_classes):
     cnn_model = nn.Sequential(
         nn.Conv2d(3, 96, kernel_size=11, stride=4, padding=0),
         nn.BatchNorm2d(96),
@@ -95,7 +95,7 @@ def alex_net(n_classes, image_size):
     return cnn_model
 
 
-def vgg_16_gab(n_classes, image_size):
+def vgg_16_gab(n_classes):
     cnn_model = nn.Sequential(
         # ConvBlock 1
         nn.Conv2d(3, 64, kernel_size=3, stride=1, padding=1),
@@ -141,7 +141,7 @@ def vgg_16_gab(n_classes, image_size):
     return cnn_model
 
 
-def vgg_16(n_classes, image_size):
+def vgg_16(n_classes):
     cnn_model = nn.Sequential(
         # ConvBlock 1
         nn.Conv2d(3, 64, kernel_size=3, stride=1, padding=1),
@@ -210,7 +210,7 @@ def vgg_16(n_classes, image_size):
     return cnn_model
 
 
-def default_cnn(n_classes, image_size):
+def default_cnn(n_classes):
     cnn_model = nn.Sequential(
         # ConvBlock 1
         nn.Conv2d(3, 6, kernel_size=5, stride=1, padding=0),
@@ -242,16 +242,73 @@ def default_cnn(n_classes, image_size):
     return cnn_model
 
 
-def get_cnn_model_by_name(name='le_net', n_classes=2, image_size=None):
+def kaggle_test_1(n_classes):
+    cnn_model = nn.Sequential(
+        # ConvBlock 1
+        nn.Conv2d(3, 64, kernel_size=3, stride=1, padding=0),
+        nn.BatchNorm2d(64),
+        nn.ReLU(),
+        nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
+
+        # ConvBlock 2
+        nn.Conv2d(64, 64, kernel_size=3, stride=1, padding=0),
+        nn.BatchNorm2d(64),
+        nn.ReLU(),
+        nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
+
+        # DenseBlock
+        nn.Flatten(),
+        nn.Linear(20736, 64),
+        nn.Sigmoid(),
+        nn.Linear(64, n_classes),
+    )
+    return cnn_model
+
+
+def kaggle_test_2(n_classes):
+    cnn_model = nn.Sequential(
+        # ConvBlock 1
+        nn.Conv2d(3, 32, kernel_size=3, stride=1, padding=0),
+        nn.BatchNorm2d(32),
+        nn.ReLU(),
+        nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
+        nn.Dropout(p=0.25, inplace=True),
+
+        # ConvBlock 2
+        nn.Conv2d(32, 64, kernel_size=3, stride=1, padding=0),
+        nn.BatchNorm2d(64),
+        nn.ReLU(),
+        nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
+        nn.Dropout(p=0.25, inplace=True),
+
+        # ConvBlock 3
+        nn.Conv2d(64, 128, kernel_size=3, stride=1, padding=0),
+        nn.BatchNorm2d(128),
+        nn.ReLU(),
+        nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
+        nn.Dropout(p=0.25, inplace=True),
+
+        # DenseBlock
+        nn.Flatten(),
+        nn.Linear(8192, 512),
+        nn.ReLU(),
+        nn.BatchNorm1d(512),
+        nn.Dropout(inplace=True),
+        nn.Linear(512, n_classes),
+    )
+    return cnn_model
+
+
+def get_cnn_model_by_name(name='le_net', n_classes=2):
     if name == 'le_net':
-        return default_cnn(n_classes, image_size)
+        return default_cnn(n_classes)
     elif name == 'le_net_wiki':
-        return  le_net_wiki(n_classes, image_size)
+        return  le_net_wiki(n_classes)
     elif name == 'vgg_16':
-        return vgg_16(n_classes, image_size)
+        return vgg_16(n_classes)
     elif name == 'vgg_16_gab':
-        return vgg_16_gab(n_classes, image_size)
+        return vgg_16_gab(n_classes)
     elif name == 'alex_net':
-        return alex_net(n_classes, image_size)
+        return alex_net(n_classes)
     else:
-        return default_cnn(n_classes, image_size)
+        return kaggle_test_2(n_classes)

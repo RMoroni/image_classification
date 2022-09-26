@@ -1,22 +1,20 @@
+import dataset
 import numpy as np
-from torch import nn, from_numpy, max
-from torch.utils.data import TensorDataset, DataLoader
+from torch import max
 from sklearn.metrics import accuracy_score
 
+DEVICE = "cpu"
 
-def test(fit_model, data, labels):
+
+def main(fit_model, data, labels):
     fit_model.eval()
 
-    tensor_x = from_numpy(data.transpose(0, 3, 1, 2))
-    tensor_y = from_numpy(labels)
-    tensor_dataset = TensorDataset(tensor_x, tensor_y)
-    dataloader = DataLoader(dataset=tensor_dataset, shuffle=True)
+    dataloader = dataset.dataset_to_dataloader(data, labels)
 
     x_pred_list, y_pred_list = [], []
-
     for i, (image, label) in enumerate(dataloader):
-        image = image.to("cpu")
-        label = label.to("cpu")
+        image = image.to(DEVICE)
+        label = label.to(DEVICE)
         output = fit_model(image.float())
         # loss = loss_fn(outputs, labels)
         _, predicted = max(output.data, 1)
