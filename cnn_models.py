@@ -240,25 +240,35 @@ def default_cnn(n_classes):
     return cnn_model
 
 
-def kaggle_test_1(n_classes):
+def default_test(n_classes):
     cnn_model = nn.Sequential(
         # ConvBlock 1
-        nn.Conv2d(3, 64, kernel_size=3, stride=1, padding=0),
-        nn.BatchNorm2d(64),
+        nn.Conv2d(3, 6, kernel_size=3, stride=1, padding=0),
+        nn.BatchNorm2d(6),
         nn.ReLU(),
         nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
 
         # ConvBlock 2
-        nn.Conv2d(64, 64, kernel_size=3, stride=1, padding=0),
-        nn.BatchNorm2d(64),
+        nn.Conv2d(6, 9, kernel_size=3, stride=1, padding=0),
+        nn.BatchNorm2d(9),
+        nn.ReLU(),
+        nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
+
+        nn.Conv2d(9, 12, kernel_size=3, stride=1, padding=0),
+        nn.BatchNorm2d(12),
+        nn.ReLU(),
+        nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
+
+        nn.Conv2d(12, 15, kernel_size=5, stride=1, padding=0),
+        nn.BatchNorm2d(15),
         nn.ReLU(),
         nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
 
         # DenseBlock
         nn.Flatten(),
-        nn.Linear(20736, 64),
+        nn.Linear(375, 20),
         nn.Sigmoid(),
-        nn.Linear(64, n_classes),
+        nn.Linear(20, n_classes),
     )
     return cnn_model  # 80 x 80
 
@@ -301,12 +311,14 @@ def get_cnn_model_by_name(name='le_net', n_classes=2):
     if name == 'le_net':
         return default_cnn(n_classes)
     elif name == 'le_net_wiki':
-        return  le_net_wiki(n_classes)
+        return le_net_wiki(n_classes)
     elif name == 'vgg_16':
         return vgg_16(n_classes)
     elif name == 'vgg_16_gab':
         return vgg_16_gab(n_classes)
     elif name == 'alex_net':
         return alex_net(n_classes)
+    elif name == 'default':
+        return default_test(n_classes)
     else:
         return kaggle_test_2(n_classes)
