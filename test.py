@@ -1,20 +1,18 @@
-import dataset
 import numpy as np
 from torch import max
 from sklearn.metrics import accuracy_score
 
-DEVICE = "cpu"
 
+def eval_neural_network_model(neural_network_eval_params: dict):
+    fit_model = neural_network_eval_params['fit_model']
+    dataset = neural_network_eval_params['dataset']
 
-def main(fit_model, data, labels):
     fit_model.eval()
 
-    dataloader = dataset.dataset_to_dataloader(data, labels)
-
     x_pred_list, y_pred_list = [], []
-    for i, (image, label) in enumerate(dataloader):
-        image = image.to(DEVICE)
-        label = label.to(DEVICE)
+    for i, (image, label) in enumerate(dataset):
+        image = image.to(neural_network_eval_params['device'])
+        label = label.to(neural_network_eval_params['device'])
         output = fit_model(image.float())
         # loss = loss_fn(outputs, labels)
         _, predicted = max(output.data, 1)
