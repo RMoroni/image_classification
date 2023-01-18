@@ -264,9 +264,14 @@ def default_test(n_classes):
         nn.ReLU(),
         nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
 
+        nn.Conv2d(15, 18, kernel_size=5, stride=1, padding=0),
+        nn.BatchNorm2d(18),
+        nn.ReLU(),
+        nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
+
         # DenseBlock
         nn.Flatten(),
-        nn.Linear(375, 20),
+        nn.Linear(288, 20),
         nn.Sigmoid(),
         nn.Linear(20, n_classes),
     )
