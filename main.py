@@ -3,12 +3,12 @@ import train
 import test
 from cnn_models import get_cnn_model_by_name
 
-BATCH_SIZE = 40
+BATCH_SIZE = 85
 DEVICE = "cpu"
 LEARNING_RATE = 0.001
-N_EPOCHS = 20
+N_EPOCHS = 15
 N_CLASSES = 2
-WEIGHT_DECAY = 0.0001
+WEIGHT_DECAY = 0.1
 # ORIGINAL IMAGE SIZE: 370x320
 
 

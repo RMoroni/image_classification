@@ -243,36 +243,43 @@ def default_cnn(n_classes):
 def default_test(n_classes):
     cnn_model = nn.Sequential(
         # ConvBlock 1
-        nn.Conv2d(3, 6, kernel_size=3, stride=1, padding=0),
-        nn.BatchNorm2d(6),
-        nn.ReLU(),
+        nn.Conv2d(3, 5, kernel_size=3, stride=1, padding=0),
+        nn.BatchNorm2d(5),
+        nn.LeakyReLU(),
         nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
 
         # ConvBlock 2
-        nn.Conv2d(6, 9, kernel_size=3, stride=1, padding=0),
+        nn.Conv2d(5, 7, kernel_size=3, stride=1, padding=0),
+        nn.BatchNorm2d(7),
+        nn.LeakyReLU(),
+        nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
+
+        nn.Conv2d(7, 9, kernel_size=3, stride=1, padding=0),
         nn.BatchNorm2d(9),
-        nn.ReLU(),
+        nn.LeakyReLU(),
         nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
 
-        nn.Conv2d(9, 12, kernel_size=3, stride=1, padding=0),
-        nn.BatchNorm2d(12),
-        nn.ReLU(),
+        nn.Conv2d(9, 11, kernel_size=3, stride=1, padding=0),
+        nn.BatchNorm2d(11),
+        nn.LeakyReLU(),
         nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
 
-        nn.Conv2d(12, 15, kernel_size=5, stride=1, padding=0),
-        nn.BatchNorm2d(15),
-        nn.ReLU(),
+        nn.Conv2d(11, 13, kernel_size=5, stride=1, padding=0),
+        nn.BatchNorm2d(13),
+        nn.LeakyReLU(),
         nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
 
-        nn.Conv2d(15, 18, kernel_size=5, stride=1, padding=0),
-        nn.BatchNorm2d(18),
-        nn.ReLU(),
-        nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
+        # nn.Conv2d(13, 15, kernel_size=3, stride=1, padding=0),
+        # nn.BatchNorm2d(15),
+        # nn.LeakyReLU(),
+        # nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
 
         # DenseBlock
         nn.Flatten(),
-        nn.Linear(288, 20),
-        nn.Sigmoid(),
+        # nn.Linear(117, 117),
+        # nn.LeakyReLU(),
+        nn.Linear(325, 20),
+        nn.LeakyReLU(),
         nn.Linear(20, n_classes),
     )
     return cnn_model  # 80 x 80
