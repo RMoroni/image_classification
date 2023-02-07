@@ -246,28 +246,28 @@ def default_test(n_classes):
         nn.Conv2d(3, 5, kernel_size=3, stride=1, padding=0),
         nn.BatchNorm2d(5),
         nn.LeakyReLU(),
-        nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
+        nn.AvgPool2d(kernel_size=2, stride=2, padding=0),
 
         # ConvBlock 2
         nn.Conv2d(5, 7, kernel_size=3, stride=1, padding=0),
         nn.BatchNorm2d(7),
         nn.LeakyReLU(),
-        nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
+        nn.AvgPool2d(kernel_size=2, stride=2, padding=0),
 
         nn.Conv2d(7, 9, kernel_size=3, stride=1, padding=0),
         nn.BatchNorm2d(9),
         nn.LeakyReLU(),
-        nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
+        nn.AvgPool2d(kernel_size=2, stride=2, padding=0),
 
         nn.Conv2d(9, 11, kernel_size=3, stride=1, padding=0),
         nn.BatchNorm2d(11),
         nn.LeakyReLU(),
-        nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
+        nn.AvgPool2d(kernel_size=2, stride=2, padding=0),
 
         nn.Conv2d(11, 13, kernel_size=5, stride=1, padding=0),
         nn.BatchNorm2d(13),
         nn.LeakyReLU(),
-        nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
+        nn.AvgPool2d(kernel_size=2, stride=2, padding=0),
 
         # nn.Conv2d(13, 15, kernel_size=3, stride=1, padding=0),
         # nn.BatchNorm2d(15),
