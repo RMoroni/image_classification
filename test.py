@@ -24,5 +24,5 @@ def eval_neural_network_model(neural_network_eval_params: dict):
 
     acc = accuracy_score(x_pred_list, y_pred_list)
 
-    print(f'Test Acc: {acc * 100}')
+    print(f'Test Acc: {acc * 100:.4f}')
 

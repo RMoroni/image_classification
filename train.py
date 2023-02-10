@@ -33,5 +33,6 @@ def fit(neural_network_fit_params: dict):
 
         acc = accuracy_score(x_pred_list, y_pred_list)
 
-        print(f"Epoch [{epoch + 1}/{neural_network_fit_params['number_of_epochs']}], Loss: {loss.item()}, Acc: {acc * 100}")
+        print(f"Epoch [{epoch + 1}/{neural_network_fit_params['number_of_epochs']}], "
+              f"Loss: {loss.item():.2f}, Acc: {acc * 100:.2f}")
     return nn_model

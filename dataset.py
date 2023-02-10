@@ -60,10 +60,8 @@ def check_label_from_sample(image, label):
 
 def load_dataset():
     x_train, y_train, x_test, y_test = read_dataset_from_zipfile()
-    print(x_train.shape)
-    print(y_train.shape)
-    print(x_test.shape)
-    print(y_test.shape)
+    # print(f'Train Shape: \n\tX: {x_train.shape}\n\tY: {y_train.shape}')
+    # print(f'Test Shape: \n\tX: {x_test.shape}\n\tY: {y_test.shape}')
     # check_label_from_sample(x_test, y_test)
     # x_train, x_test = x_train.reshape(-1, INPUT_LENGTH), x_test.reshape(-1, INPUT_LENGTH)  # reshape into a list
     return x_train, y_train, x_test, y_test
