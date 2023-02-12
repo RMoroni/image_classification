@@ -259,15 +259,15 @@ def default_test(n_classes):
         nn.LeakyReLU(),
         nn.AvgPool2d(kernel_size=2, stride=2, padding=0),
 
-        nn.Conv2d(9, 11, kernel_size=3, stride=1, padding=0),
-        nn.BatchNorm2d(11),
-        nn.LeakyReLU(),
-        nn.AvgPool2d(kernel_size=2, stride=2, padding=0),
-
-        nn.Conv2d(11, 13, kernel_size=5, stride=1, padding=0),
-        nn.BatchNorm2d(13),
-        nn.LeakyReLU(),
-        nn.AvgPool2d(kernel_size=2, stride=2, padding=0),
+        # nn.Conv2d(9, 11, kernel_size=3, stride=1, padding=0),
+        # nn.BatchNorm2d(11),
+        # nn.LeakyReLU(),
+        # nn.AvgPool2d(kernel_size=2, stride=2, padding=0),
+        #
+        # nn.Conv2d(11, 13, kernel_size=5, stride=1, padding=0),
+        # nn.BatchNorm2d(13),
+        # nn.LeakyReLU(),
+        # nn.AvgPool2d(kernel_size=2, stride=2, padding=0),
 
         # nn.Conv2d(13, 15, kernel_size=3, stride=1, padding=0),
         # nn.BatchNorm2d(15),
@@ -278,9 +278,9 @@ def default_test(n_classes):
         nn.Flatten(),
         # nn.Linear(117, 117),
         # nn.LeakyReLU(),
-        nn.Linear(325, 20),
+        nn.Linear(36, 6),
         nn.LeakyReLU(),
-        nn.Linear(20, n_classes),
+        nn.Linear(6, n_classes),
     )
     return cnn_model  # 80 x 80
 
