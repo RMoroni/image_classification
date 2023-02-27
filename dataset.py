@@ -7,7 +7,9 @@ from torch import from_numpy
 from torch.utils.data import TensorDataset, DataLoader
 
 DATASET_FILE = 'dataset.zip'
-IMAGE_SIZE = 64
+IMAGE_SIZE = 256
+IMAGE_CHANNELS = 1
+OPENCV_SCALE = cv2.IMREAD_GRAYSCALE if IMAGE_CHANNELS == 1 else cv2.IMREAD_COLOR
 
 
 def create_label(filename):
@@ -21,12 +23,12 @@ def create_label(filename):
 
 
 def open_image_from_raw_data(image_data):
-    cv2_img = cv2.imdecode(np.frombuffer(image_data, np.uint8), cv2.IMREAD_COLOR)
+    cv2_img = cv2.imdecode(np.frombuffer(image_data, np.uint8), OPENCV_SCALE)
     return cv2.resize(cv2_img, (IMAGE_SIZE, IMAGE_SIZE))
 
 
 def show_image_from_raw_data(img_data):
-    img = cv2.imdecode(np.frombuffer(img_data, np.uint8), cv2.IMREAD_COLOR)
+    img = cv2.imdecode(np.frombuffer(img_data, np.uint8), OPENCV_SCALE)
     cv2.imshow("Image Sample", img)
     cv2.waitKey(0)
     print(np.array(img).shape)
@@ -68,6 +70,7 @@ def load_dataset():
 
 
 def dataset_to_dataloader(data, labels, batch_size=1):
+    data = data.reshape((len(data), IMAGE_SIZE, IMAGE_SIZE, 1)) if IMAGE_CHANNELS == 1 else data
     tensor_x = from_numpy(data.transpose(0, 3, 1, 2))
     tensor_y = from_numpy(labels)
     tensor_dataset = TensorDataset(tensor_x, tensor_y)
