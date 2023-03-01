@@ -7,8 +7,8 @@ from torch import from_numpy
 from torch.utils.data import TensorDataset, DataLoader
 
 DATASET_FILE = 'dataset.zip'
-IMAGE_SIZE = 256
-IMAGE_CHANNELS = 1
+IMAGE_SIZE = 64
+IMAGE_CHANNELS = 3
 OPENCV_SCALE = cv2.IMREAD_GRAYSCALE if IMAGE_CHANNELS == 1 else cv2.IMREAD_COLOR
 
 

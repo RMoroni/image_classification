@@ -52,31 +52,31 @@ def default_gray(n_classes):
 def default_color(n_classes):
     cnn_model = nn.Sequential(
         # ConvBlock 1
-        nn.Conv2d(3, 5, kernel_size=3, stride=1, padding=0),
-        nn.BatchNorm2d(5),
-        nn.LeakyReLU(),
-        nn.AvgPool2d(kernel_size=2, stride=2, padding=0),
+        nn.Conv2d(3, 32, kernel_size=3, stride=1, padding=0),
+        nn.BatchNorm2d(32),
+        nn.Tanh(),
+        nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
 
         # ConvBlock 2
-        nn.Conv2d(5, 7, kernel_size=3, stride=1, padding=0),
-        nn.BatchNorm2d(7),
-        nn.LeakyReLU(),
-        nn.AvgPool2d(kernel_size=2, stride=2, padding=0),
+        nn.Conv2d(32, 64, kernel_size=3, stride=1, padding=0),
+        nn.BatchNorm2d(64),
+        nn.Tanh(),
+        nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
 
-        nn.Conv2d(7, 9, kernel_size=3, stride=1, padding=0),
-        nn.BatchNorm2d(9),
-        nn.LeakyReLU(),
-        nn.AvgPool2d(kernel_size=2, stride=2, padding=0),
+        nn.Conv2d(64, 128, kernel_size=3, stride=1, padding=0),
+        nn.BatchNorm2d(128),
+        nn.Tanh(),
+        nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
 
-        nn.Conv2d(9, 11, kernel_size=3, stride=1, padding=0),
-        nn.BatchNorm2d(11),
-        nn.LeakyReLU(),
-        nn.AvgPool2d(kernel_size=2, stride=2, padding=0),
+        nn.Conv2d(128, 256, kernel_size=3, stride=1, padding=0),
+        nn.BatchNorm2d(256),
+        nn.Tanh(),
+        nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
 
-        # nn.Conv2d(11, 13, kernel_size=5, stride=1, padding=0),
-        # nn.BatchNorm2d(13),
+        # nn.Conv2d(256, 512, kernel_size=3, stride=1, padding=0),
+        # nn.BatchNorm2d(512),
         # nn.LeakyReLU(),
-        # nn.AvgPool2d(kernel_size=2, stride=2, padding=0),
+        # nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
 
         # nn.Conv2d(13, 15, kernel_size=3, stride=1, padding=0),
         # nn.BatchNorm2d(15),
@@ -85,11 +85,16 @@ def default_color(n_classes):
 
         # DenseBlock
         nn.Flatten(),
+
         # nn.Linear(117, 117),
         # nn.LeakyReLU(),
-        nn.Linear(44, 4),
-        nn.LeakyReLU(),
-        nn.Linear(4, n_classes),
+        nn.Linear(1024, 512),
+        nn.Sigmoid(),
+        nn.Linear(512, 256),
+        nn.Sigmoid(),
+        nn.Linear(256, 128),
+        nn.Sigmoid(),
+        nn.Linear(128, n_classes),
     )
     return cnn_model  # 80 x 80
 
