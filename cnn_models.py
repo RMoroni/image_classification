@@ -95,6 +95,7 @@ def default_color(n_classes):
         nn.Linear(256, 128),
         nn.Sigmoid(),
         nn.Linear(128, n_classes),
+        nn.Sigmoid(),
     )
     return cnn_model  # 80 x 80
 
