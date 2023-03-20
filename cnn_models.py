@@ -1,7 +1,7 @@
 from torch import nn
 
 
-def default_gray(n_classes):
+def _default_gray(n_classes):
     cnn_model = nn.Sequential(
         # ConvBlock 1
         nn.Conv2d(1, 32, kernel_size=7, stride=1, padding=0),
@@ -49,7 +49,7 @@ def default_gray(n_classes):
     return cnn_model
 
 
-def default_color(n_classes):
+def _default_color(n_classes):
     cnn_model = nn.Sequential(
         # ConvBlock 1
         nn.Conv2d(3, 32, kernel_size=3, stride=1, padding=0),
@@ -100,44 +100,8 @@ def default_color(n_classes):
     return cnn_model  # 80 x 80
 
 
-def kaggle_test_2(n_classes):
-    cnn_model = nn.Sequential(
-        # ConvBlock 1
-        nn.Conv2d(3, 32, kernel_size=3, stride=1, padding=0),
-        nn.BatchNorm2d(32),
-        nn.ReLU(),
-        nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
-        nn.Dropout(p=0.25, inplace=True),
-
-        # ConvBlock 2
-        nn.Conv2d(32, 64, kernel_size=3, stride=1, padding=0),
-        nn.BatchNorm2d(64),
-        nn.ReLU(),
-        nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
-        nn.Dropout(p=0.25, inplace=True),
-
-        # ConvBlock 3
-        nn.Conv2d(64, 128, kernel_size=3, stride=1, padding=0),
-        nn.BatchNorm2d(128),
-        nn.ReLU(),
-        nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
-        nn.Dropout(p=0.25, inplace=True),
-
-        # DenseBlock
-        nn.Flatten(),
-        nn.Linear(25088, 512),
-        nn.ReLU(),
-        nn.BatchNorm1d(512),
-        nn.Dropout(inplace=True),
-        nn.Linear(512, n_classes),
-    )
-    return cnn_model  # 128x128
-
-
 def get_cnn_model_by_name(name='default_color', n_classes=2):
     if name == 'default_gray':
-        return default_gray(n_classes)
-    elif name == 'default_color':
-        return default_color(n_classes)
+        return _default_gray(n_classes)
     else:
-        return kaggle_test_2(n_classes)
+        return _default_color(n_classes)
