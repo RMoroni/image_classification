@@ -1,13 +1,9 @@
-# How to run
-```
-pip3 install -r requirements
-```
-or
+# Como executar
 ```
 pip install -r requirements
 ```
-then
+Execute a main do projeto.
 ```
 python3 main.py
 ```
-It should open the dataset, train the cnn and test it.
+COm será iniciado o treinamento e teste da rede neural.

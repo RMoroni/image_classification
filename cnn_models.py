@@ -63,11 +63,13 @@ def _default_color(n_classes):
         nn.Tanh(),
         nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
 
+        # ConvBlock 3
         nn.Conv2d(64, 128, kernel_size=3, stride=1, padding=0),
         nn.BatchNorm2d(128),
         nn.Tanh(),
         nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
 
+        # ConvBlock 4
         nn.Conv2d(128, 256, kernel_size=3, stride=1, padding=0),
         nn.BatchNorm2d(256),
         nn.Tanh(),
@@ -78,16 +80,10 @@ def _default_color(n_classes):
         # nn.LeakyReLU(),
         # nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
 
-        # nn.Conv2d(13, 15, kernel_size=3, stride=1, padding=0),
-        # nn.BatchNorm2d(15),
-        # nn.LeakyReLU(),
-        # nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
-
         # DenseBlock
         nn.Flatten(),
+        nn.BatchNorm1d(1024),
 
-        # nn.Linear(117, 117),
-        # nn.LeakyReLU(),
         nn.Linear(1024, 512),
         nn.Sigmoid(),
         nn.Linear(512, 256),
@@ -95,7 +91,6 @@ def _default_color(n_classes):
         nn.Linear(256, 128),
         nn.Sigmoid(),
         nn.Linear(128, n_classes),
-        nn.Sigmoid(),
     )
     return cnn_model  # 80 x 80
 
