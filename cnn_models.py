@@ -83,6 +83,7 @@ def _default_color(n_classes):
         # DenseBlock
         nn.Flatten(),
         nn.BatchNorm1d(1024),
+        nn.Dropout(),
 
         nn.Linear(1024, 512),
         nn.Sigmoid(),
