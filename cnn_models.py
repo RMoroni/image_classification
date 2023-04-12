@@ -86,6 +86,8 @@ def _default_color(n_classes):
         nn.Sigmoid(),
         nn.Linear(30, 30),
         nn.Sigmoid(),
+        nn.Linear(30, 30),
+        nn.Sigmoid(),
         nn.Linear(30, n_classes),
     )
     return cnn_model  # 80 x 80
