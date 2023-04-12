@@ -52,46 +52,41 @@ def _default_gray(n_classes):
 def _default_color(n_classes):
     cnn_model = nn.Sequential(
         # ConvBlock 1
-        nn.Conv2d(3, 32, kernel_size=3, stride=1, padding=0),
-        nn.BatchNorm2d(32),
+        nn.Conv2d(3, 6, kernel_size=3, stride=1, padding=0),
+        nn.BatchNorm2d(6),
         nn.Tanh(),
         nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
 
         # ConvBlock 2
-        nn.Conv2d(32, 64, kernel_size=3, stride=1, padding=0),
-        nn.BatchNorm2d(64),
+        nn.Conv2d(6, 9, kernel_size=3, stride=1, padding=0),
+        nn.BatchNorm2d(9),
         nn.Tanh(),
         nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
 
         # ConvBlock 3
-        nn.Conv2d(64, 128, kernel_size=3, stride=1, padding=0),
-        nn.BatchNorm2d(128),
+        nn.Conv2d(9, 12, kernel_size=3, stride=1, padding=0),
+        nn.BatchNorm2d(12),
         nn.Tanh(),
         nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
 
         # ConvBlock 4
-        nn.Conv2d(128, 256, kernel_size=3, stride=1, padding=0),
-        nn.BatchNorm2d(256),
+        nn.Conv2d(12, 15, kernel_size=3, stride=1, padding=0),
+        nn.BatchNorm2d(15),
         nn.Tanh(),
         nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
 
-        # nn.Conv2d(256, 512, kernel_size=3, stride=1, padding=0),
-        # nn.BatchNorm2d(512),
-        # nn.LeakyReLU(),
-        # nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
-
         # DenseBlock
         nn.Flatten(),
-        nn.BatchNorm1d(1024),
+        nn.BatchNorm1d(60),
         nn.Dropout(),
 
-        nn.Linear(1024, 512),
+        nn.Linear(60, 60),
         nn.Sigmoid(),
-        nn.Linear(512, 256),
+        nn.Linear(60, 30),
         nn.Sigmoid(),
-        nn.Linear(256, 128),
+        nn.Linear(30, 30),
         nn.Sigmoid(),
-        nn.Linear(128, n_classes),
+        nn.Linear(30, n_classes),
     )
     return cnn_model  # 80 x 80
 
