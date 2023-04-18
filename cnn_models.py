@@ -52,45 +52,41 @@ def _default_gray(n_classes):
 def _default_color(n_classes):
     cnn_model = nn.Sequential(
         # ConvBlock 1
-        nn.Conv2d(3, 6, kernel_size=3, stride=1, padding=0),
-        nn.BatchNorm2d(6),
+        nn.Conv2d(3, 16, kernel_size=3, stride=1, padding=0),
+        nn.BatchNorm2d(16),
         nn.Tanh(),
         nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
 
         # ConvBlock 2
-        nn.Conv2d(6, 9, kernel_size=3, stride=1, padding=0),
-        nn.BatchNorm2d(9),
+        nn.Conv2d(16, 16, kernel_size=3, stride=1, padding=0),
+        nn.BatchNorm2d(16),
         nn.Tanh(),
         nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
 
         # ConvBlock 3
-        nn.Conv2d(9, 12, kernel_size=3, stride=1, padding=0),
-        nn.BatchNorm2d(12),
+        nn.Conv2d(16, 32, kernel_size=3, stride=1, padding=0),
+        nn.BatchNorm2d(32),
         nn.Tanh(),
         nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
 
         # ConvBlock 4
-        nn.Conv2d(12, 15, kernel_size=3, stride=1, padding=0),
-        nn.BatchNorm2d(15),
+        nn.Conv2d(32, 32, kernel_size=3, stride=1, padding=0),
+        nn.BatchNorm2d(32),
         nn.Tanh(),
         nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
 
         # DenseBlock
         nn.Flatten(),
-        nn.BatchNorm1d(60),
+        nn.BatchNorm1d(128),
         nn.Dropout(),
 
-        nn.Linear(60, 60),
+        nn.Linear(128, 128),
         nn.Sigmoid(),
-        nn.Linear(60, 30),
+        nn.Linear(128, 128),
         nn.Sigmoid(),
-        nn.Linear(30, 30),
-        nn.Sigmoid(),
-        nn.Linear(30, 30),
-        nn.Sigmoid(),
-        nn.Linear(30, n_classes),
+        nn.Linear(128, n_classes),
     )
-    return cnn_model  # 80 x 80
+    return cnn_model
 
 
 def get_cnn_model_by_name(name='default_color', n_classes=2):
