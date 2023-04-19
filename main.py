@@ -6,7 +6,7 @@ from cnn_models import get_cnn_model_by_name
 BATCH_SIZE = 85
 DEVICE = "cpu"
 LEARNING_RATE = 1e-4
-N_EPOCHS = 100
+N_EPOCHS = 30
 N_CLASSES = 2
 WEIGHT_DECAY = 1e-6
 # ORIGINAL IMAGE SIZE: 370x320
