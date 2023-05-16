@@ -1,10 +1,11 @@
 import dataset
 import train
 import test
+import torch
 from cnn_models import get_cnn_model_by_name
 
 BATCH_SIZE = 85
-DEVICE = "cpu"
+DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 LEARNING_RATE = 1e-4
 N_EPOCHS = 30
 N_CLASSES = 2

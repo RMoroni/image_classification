@@ -4,6 +4,6 @@ pip install -r requirements
 ```
 Execute a main do projeto.
 ```
-python3 main.py
+python main.py
 ```
-COm será iniciado o treinamento e teste da rede neural.
+Com isso será iniciado o treinamento e teste da rede neural.
