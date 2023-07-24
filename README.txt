@@ -1,0 +1,1 @@
+# Multiplos pequenos projetos de classificação utilizando imagens
