@@ -1,6 +1,7 @@
 import cv2
 import zipfile
 import numpy as np
+from matplotlib import pyplot as plt
 from tqdm import tqdm
 
 DATASET_FILENAME = 'dataset.zip'
@@ -33,4 +34,6 @@ def load_dataset() -> tuple:
             y_train.append(label_from_filename(file))
         else:
             print(f'not possible append {file} in dataset')
-    return np.asarray(x_train), np.asarray(y_train), np.asarray(test)
+    x_train, y_train, test = np.asarray(x_train), np.asarray(y_train), np.asarray(test)
+    print(f'x_train: {x_train.shape}, y_train: {y_train.shape}, test: {test.shape}')
+    return x_train, y_train, test
